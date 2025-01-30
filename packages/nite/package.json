@@ -1,0 +1,128 @@
+{
+  "name": "nite",
+  "version": "1.0.1-beta.0",
+  "type": "module",
+  "license": "MIT",
+  "author": "Hachimetsu",
+  "description": "Native-ESM powered backend dev build tool",
+  "bin": {
+    "nite": "bin/nite.js"
+  },
+  "keywords": [
+    "backend",
+    "framework",
+    "hmr",
+    "dev-server",
+    "build-tool",
+    "nite"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "module-sync": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./module-runner": "./dist/module-runner.js",
+    "./types/*": {
+      "types": "./types/*"
+    },
+    "./types/internal/*": null,
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "module-runner": [
+        "dist/module-runner.d.ts"
+      ]
+    }
+  },
+  "imports": {
+    "#module-sync-enabled": {
+      "module-sync": "./misc/true.js",
+      "default": "./misc/false.js"
+    }
+  },
+  "files": [
+    "bin",
+    "dist",
+    "misc/**/*.js",
+    "client.d.ts",
+    "index.cjs",
+    "index.d.cts",
+    "types"
+  ],
+  "engines": {
+    "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitejs/nite.git",
+    "directory": "packages/nite"
+  },
+  "bugs": {
+    "url": "https://github.com/nitejs/nite/issues"
+  },
+  "homepage": "https://nite.dev",
+  "funding": "https://github.com/nitejs/nite?sponsor=1",
+  "scripts": {
+    "dev": "tsx scripts/dev.ts",
+    "build": "premove dist && pnpm build-bundle && pnpm build-types",
+    "build-bundle": "rollup --config rollup.config.ts --configPlugin esbuild",
+    "build-types": "pnpm build-types-temp && pnpm build-types-roll && pnpm build-types-check",
+    "build-types-temp": "tsc --emitDeclarationOnly --outDir temp -p src/tsconfig.build.json",
+    "build-types-roll": "rollup --config rollup.dts.config.ts --configPlugin esbuild && premove temp",
+    "build-types-check": "tsc --project tsconfig.check.json",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p src"
+  },
+  "//": "READ CONTRIBUTING.md to understand what to put under deps vs. devDeps!",
+  "dependencies": {
+    "esbuild": "^0.24.2",
+    "postcss": "^8.5.1",
+    "rollup": "^4.30.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "~2.3.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "16.0.0",
+    "cac": "^6.7.14",
+    "dep-types": "link:./src/types",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.2",
+    "magic-string": "^0.30.17",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "rollup-plugin-license": "^3.5.3",
+    "mlly": "^1.7.4",
+    "rollup-plugin-dts": "^6.1.1",
+    "@babel/parser": "^7.26.7",
+    "estree-walker": "^3.0.3",
+    "@jridgewell/trace-mapping": "^0.3.25"
+  },
+  "peerDependencies": {
+    "@types/node": "^18.0.0 || ^20.0.0 || >=22.0.0",
+    "tsx": "^4.8.1"
+  },
+  "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    },
+    "jiti": {
+      "optional": true
+    },
+    "sugarss": {
+      "optional": true
+    },
+    "terser": {
+      "optional": true
+    },
+    "tsx": {
+      "optional": true
+    },
+    "yaml": {
+      "optional": true
+    }
+  }
+}

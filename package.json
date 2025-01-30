@@ -1,0 +1,31 @@
+{
+  "name": "@nitejs/nite-monorepo",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
+  },
+  "homepage": "https://nite.dev/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitejs/nite.git"
+  },
+  "keywords": [
+    "backend",
+    "hmr",
+    "dev-server",
+    "build-tool",
+    "nite"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "pnpm -r --parallel --filter='./packages/*' run dev",
+    "build": "pnpm -r --filter='./packages/*' run build"
+  },
+  "devDependencies": {
+    "premove": "^4.0.0",
+    "typescript": "~5.7.2",
+    "lint-staged": "^15.4.3"
+  },
+  "packageManager": "pnpm@9.15.4"
+}
