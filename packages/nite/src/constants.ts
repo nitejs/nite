@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import type { RollupPluginHooks } from './typeUtils'
 
 const { version } = JSON.parse(
-  readFileSync(new URL('../../package.json', import.meta.url)).toString(),
+  readFileSync(new URL('../package.json', import.meta.url)).toString(),
 )
 
 export const ROLLUP_HOOKS = [
@@ -115,8 +115,8 @@ export const nite_PACKAGE_DIR = resolve(
   '../../..',
 )
 
-export const CLIENT_ENTRY = resolve(nite_PACKAGE_DIR, 'dist/client/client.mjs')
-export const ENV_ENTRY = resolve(nite_PACKAGE_DIR, 'dist/client/env.mjs')
+export const CLIENT_ENTRY = resolve(nite_PACKAGE_DIR, 'dist/client.mjs')
+export const ENV_ENTRY = resolve(nite_PACKAGE_DIR, 'dist/env.mjs')
 export const CLIENT_DIR = path.dirname(CLIENT_ENTRY)
 
 // ** READ THIS ** before editing `KNOWN_ASSET_TYPES`.

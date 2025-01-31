@@ -3,5 +3,10 @@
 // export { parseAst, parseAstAsync } from 'rollup/parseAst'
 // export type { TransformOptions as EsbuildTransformOptions } from 'esbuild'
 // export type { ServerOptions } from 'node:https'
+interface UserConfig {}
+export type { UserConfig }
 
-export {}
+function defineConfig(config: UserConfig) {
+  return config
+}
+export { defineConfig }

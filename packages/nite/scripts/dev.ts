@@ -17,7 +17,7 @@ import {
     "export * from '../../src/module-runner/index.ts'",
   )
   
-  const serverOptions: BuildOptions = {
+  const runnerOptions: BuildOptions = {
     bundle: true,
     platform: 'node',
     target: 'node18',
@@ -29,31 +29,20 @@ import {
       ...Object.keys(packageJSON.devDependencies),
     ],
   }
-  const clientOptions: BuildOptions = {
-    bundle: true,
-    platform: 'browser',
-    target: 'es2020',
-    format: 'esm',
-    sourcemap: true,
-  }
   
   const watch = async (options: BuildOptions) => {
     const ctx = await context(options)
     await ctx.watch()
   }
   
-//   // envConfig
-  void watch({
-    entryPoints: ['src/env.ts'],
-    outfile: 'dist/client/env.mjs',
-    ...clientOptions,
-  })
+
   // nodeConfig
   void watch({
-    ...serverOptions,
+    ...runnerOptions,
     entryPoints: {
-      cli: 'src/cli.ts',
-      constants: 'src/constants.ts',
+      env: 'src/env/index.ts',
+      cli: 'src/cli/index.ts',
+      constants: 'src/constants/index.ts',
       index: 'src/index.ts',
     },
     outdir: 'dist',
@@ -93,10 +82,10 @@ import {
       },
     ],
   })
-  // moduleRunnerConfig
-  void watch({
-    ...serverOptions,
-    entryPoints: ['./src/module-runner/index.ts'],
-    outfile: 'dist/module-runner.js',
-    format: 'esm',
-  })
+//   // moduleRunnerConfig
+//   void watch({
+//     ...runnerOptions,
+//     entryPoints: ['./src/module-runner/index.ts'],
+//     outfile: 'dist/module-runner.js',
+//     format: 'esm',
+//   })

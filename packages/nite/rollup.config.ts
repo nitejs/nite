@@ -17,14 +17,14 @@ const pkg = JSON.parse(
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const envConfig = defineConfig({
-  input: path.resolve(__dirname, 'src/env.ts'),
+  input: path.resolve(__dirname, 'src/env/index.ts'),
   plugins: [
     esbuild({
       tsconfig: path.resolve(__dirname, 'src/tsconfig.json'),
     }),
   ],
   output: {
-    file: path.resolve(__dirname, 'dist/client', 'env.mjs'),
+    file: path.resolve(__dirname, 'dist', 'env.mjs'),
   },
 })
 
@@ -91,8 +91,8 @@ const nodeConfig = defineConfig({
   ...sharedNodeOptions,
   input: {
     index: path.resolve(__dirname, 'src/index.ts'),
-    cli: path.resolve(__dirname, 'src/cli.ts'),
-    constants: path.resolve(__dirname, 'src/constants.ts'),
+    cli: path.resolve(__dirname, 'src/cli/index.ts'),
+    constants: path.resolve(__dirname, 'src/constants/index.ts'),
   },
   external: [
     /^nite\//,

@@ -20,12 +20,24 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "pnpm -r --parallel --filter='./packages/*' run dev",
-    "build": "pnpm -r --filter='./packages/*' run build"
+    "build": "pnpm -r --filter='./packages/*' run build",
+    "test": "pnpm -r --filter='./playground*' run dev"
   },
   "devDependencies": {
     "premove": "^4.0.0",
     "typescript": "~5.7.2",
-    "lint-staged": "^15.4.3"
+    "lint-staged": "^15.4.3",
+    "nite": "workspace:*"
   },
-  "packageManager": "pnpm@9.15.4"
+  "packageManager": "pnpm@9.15.4",
+  "pnpm": {
+    "overrides": {
+      "nite": "workspace:*"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "nite": "*"
+      }
+    }
+  }
 }
